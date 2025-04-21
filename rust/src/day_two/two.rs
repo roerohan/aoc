@@ -39,32 +39,38 @@ fn main() {
         let mut tolerance = 1;
         for i in 0..diffs.len() - 1 {
             if ascending {
-                if diffs[i] > 3 && diffs[i + 1] < 3 - diffs[i] {
-                    tolerance -= 1;
+                if diffs[i] <= 3 && diffs[i] >= 1 {
                 } else {
-                    tolerance -= 2;
-                    break;
-                }
+                    if diffs[i] > 3 && diffs[i + 1] < 3 - diffs[i] {
+                        tolerance -= 1;
+                    } else {
+                        tolerance -= 2;
+                        break;
+                    }
 
-                if diffs[i] < 1 && diffs[i + 1] > 1 - diffs[i] {
-                    tolerance -= 1;
-                } else {
-                    tolerance -= 2;
-                    break;
+                    if diffs[i] < 1 && diffs[i + 1] > 1 - diffs[i] {
+                        tolerance -= 1;
+                    } else {
+                        tolerance -= 2;
+                        break;
+                    }
                 }
             } else {
-                if diffs[i] < -3 && diffs[i + 1] > -3 - diffs[i] {
-                    tolerance -= 1;
+                if diffs[i] >= -3 && diffs[i] <= -1 {
                 } else {
-                    tolerance -= 2;
-                    break;
-                }
+                    if diffs[i] < -3 && diffs[i + 1] > -3 - diffs[i] {
+                        tolerance -= 1;
+                    } else {
+                        tolerance -= 2;
+                        break;
+                    }
 
-                if diffs[i] > -1 && diffs[i + 1] < -1 - diffs[i] {
-                    tolerance -= 1;
-                } else {
-                    tolerance -= 2;
-                    break;
+                    if diffs[i] > -1 && diffs[i + 1] < -1 - diffs[i] {
+                        tolerance -= 1;
+                    } else {
+                        tolerance -= 2;
+                        break;
+                    }
                 }
             }
         }
