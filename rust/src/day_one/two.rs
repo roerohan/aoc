@@ -1,4 +1,4 @@
-use std::fs::read_to_string;
+use std::{collections::HashMap, fs::read_to_string};
 
 fn read_lines(filename: &str) -> Vec<String> {
     let mut result = Vec::new();
@@ -29,14 +29,28 @@ fn main() {
         arr2.push(num2);
     }
 
-    arr1.sort();
-    arr2.sort();
+    let mut frequency_map: HashMap<i32, i32> = HashMap::new();
 
-    let mut sum = 0;
-
-    for i in 0..arr1.len() {
-        sum += (arr1[i] - arr2[i]).abs();
+    for i in arr2 {
+        match frequency_map.get(&i) {
+            Some(num) => {
+                frequency_map.insert(i, num + 1);
+            }
+            None => {
+                frequency_map.insert(i, 1);
+            }
+        };
     }
 
-    println!("{:?}", sum);
+    let mut similarity_score = 0;
+    for i in arr1 {
+        match frequency_map.get(&i) {
+            Some(num) => {
+                similarity_score += i * num;
+            }
+            None => {}
+        };
+    }
+
+    println!("{:?}", similarity_score);
 }
